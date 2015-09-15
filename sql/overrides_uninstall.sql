@@ -1,0 +1,1 @@
+DROP TABLE `klangsoft_overrides`;

@@ -12,4 +12,4 @@ The first time you access the extension, at http://yourdomain/civicrm/overrides,
 
 If a file is shown as changed, you should first notify the maintainer of the extension to let them know that their extension may need to be updated to work with the latest core file(s). If you are unable to reach the maintainer, or they're not interested in doing anything about it, then you or someone in your IT department should look into what changed and merge them into the extension's overrides. The other option is to disable the extension.
 
-After all changes have been resolved, have the extension save an updated snapshot. CiviCRM requires write access to the com.klangsoft.overrides extension directory in order to save the snapshot.
+After all changes have been resolved, have the extension save an updated snapshot.

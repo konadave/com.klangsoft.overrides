@@ -2,8 +2,6 @@
 
 require_once 'overrides.civix.php';
 
-define('OVERRIDE_DIR', __DIR__);
-
 /**
  * Implements hook_civicrm_config().
  *
