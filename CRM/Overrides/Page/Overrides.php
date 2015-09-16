@@ -68,7 +68,6 @@ class CRM_Overrides_Page_Overrides extends CRM_Core_Page {
           elseif (file_exists($civicrm_root . $rel_file)) {
             $this->core[$rel_file] = array(
               'extensions' => array($ext),
-              'hash' => '',
               'changed' => false,
               'multiple' => false,
             );
@@ -89,10 +88,9 @@ class CRM_Overrides_Page_Overrides extends CRM_Core_Page {
     $save_snapshot = $save_snapshot || empty($snapshot);
 
     foreach($this->core as $rel_file => &$params) {
-      $full_name = $civicrm_root . $rel_file;
-    $hash = md5_file($full_name);
-    $params['changed'] = !empty($snapshot[$rel_file]) && ($hash != $snapshot[$rel_file]['hash']);
-      $params['hash'] = $snapshot[$rel_file]['hash'] = $hash;
+      $hash = md5_file($civicrm_root . $rel_file);
+      $params['changed'] = !empty($snapshot[$rel_file]) && ($hash != $snapshot[$rel_file]);
+      $snapshot[$rel_file] = $hash;
     }
 
     if ($save_snapshot) {
