@@ -28,6 +28,14 @@ function overrides_civicrm_xmlMenu(&$files) {
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_install
  */
 function overrides_civicrm_install() {
+
+  CRM_Core_DAO::executeQuery("
+    CREATE TABLE `klangsoft_overrides` (
+      `snapshot` text NOT NULL
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;");
+
+  CRM_Core_DAO::executeQuery("INSERT INTO `klangsoft_overrides` VALUES ('a:0:{}');");
+
   _overrides_civix_civicrm_install();
 }
 
@@ -37,6 +45,9 @@ function overrides_civicrm_install() {
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_uninstall
  */
 function overrides_civicrm_uninstall() {
+
+  CRM_Core_DAO::executeQuery("DROP TABLE `klangsoft_overrides`;");
+
   _overrides_civix_civicrm_uninstall();
 }
 
