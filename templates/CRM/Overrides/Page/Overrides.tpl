@@ -6,6 +6,9 @@
 			border: 1px solid silver;
 			max-width: 50%;
 		}
+		#extension-list p {
+			padding: 0px 10px;
+		}
 		.extension-overrides {
 			margin: 20px 5px;
 		}
