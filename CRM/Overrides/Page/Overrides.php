@@ -41,6 +41,7 @@ class CRM_Overrides_Page_Overrides extends CRM_Core_Page {
     $this->assign('extensions', $extensions);
     $this->assign('core', $this->core);
     $this->assign('snapshot', $snapshot);
+    $this->assign('last_snapshot', CRM_Core_BAO_Setting::getItem('com.klangsoft_overrides', 'last_snapshot'));
 
     parent::run();
   }
@@ -68,8 +69,9 @@ class CRM_Overrides_Page_Overrides extends CRM_Core_Page {
           elseif (file_exists($civicrm_root . $rel_file)) {
             $this->core[$rel_file] = array(
               'extensions' => array($ext),
+              'is_new' => false,
               'changed' => false,
-              'multiple' => false,
+              'multiple' => false
             );
             $is_core = true;
           }
@@ -89,14 +91,21 @@ class CRM_Overrides_Page_Overrides extends CRM_Core_Page {
 
     foreach($this->core as $rel_file => &$params) {
       $hash = md5_file($civicrm_root . $rel_file);
-      $params['changed'] = !empty($snapshot[$rel_file]) && ($hash != $snapshot[$rel_file]);
+      $params['is_new'] = empty($snapshot[$rel_file]);
+      $params['changed'] = !$params['is_new'] && ($hash != $snapshot[$rel_file]);
       $snapshot[$rel_file] = $hash;
     }
 
     if ($save_snapshot) {
-      foreach($this->core as &$params)
+      foreach($this->core as &$params) {
         $params['changed'] = false;
+        $params['is_new'] = false;
+      }
       CRM_Core_DAO::singleValueQuery("UPDATE klangsoft_overrides SET snapshot = '" . serialize($snapshot) . "'");
+
+      CRM_Core_BAO_Setting::setItem(date('M jS, Y, g:ia'), 'com.klangsoft_overrides', 'last_snapshot');
+
+      CRM_Core_Session::setStatus(ts("The overrides snapshot has been saved."), ts('Saved'), 'success');
     }
   }
 

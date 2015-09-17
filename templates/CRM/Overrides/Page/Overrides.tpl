@@ -17,6 +17,10 @@
 			font-weight: bold;
 			color: red;
 		}
+		.addition {
+			font-weight: bold;
+			color: blue;
+		}
 	</style>
 {/literal}
 <hr />
@@ -26,7 +30,7 @@
 			<p><strong>{$name}</strong></p>
 			<ul>
 				{foreach from=$files item=file}
-					<li{if $core[$file]['changed']} class="overridden"{/if}>{$file}</li>
+					<li{if $core[$file]['changed']} class="overridden"{elseif $core[$file]['is_new']} class="addition"{/if}>{$file}</li>
 				{/foreach}
 			</ul>
 		</div>
@@ -39,8 +43,9 @@
 <p>So what happens when the core file that the extension has overridden gets modified? CiviCRM will continue to use the overriden file provided by the extension. This means a security patch may not get applied, or you might miss out on some new feature that was added, etc.</p>
 
 <p><strong>The list to the right shows which extensions are overridding core files, and
-	which files they override. Any file listed in red has been changed in core since the
-	last snapshot was saved.</strong></p>
+	which files they override. Any file listed in <span class="overridden">red</span> has been changed in core since the
+	last snapshot was saved. Any file listed in <span class="addition">blue</span> has been added since the last snapshot was
+	saved, so you should save a new snapshot now.</strong></p>
 
 <p>If a file is shown as changed, you should first notify the maintainer of the extension to let them know that their extension may need to be updated to work with the latest core file(s). If you are unable to reach the maintainer, or they're not interested in doing anything about it, then you or someone in your IT department should look into what changed and merge them into the extension's overrides. The other option is to disable the extension.</p>
 
@@ -48,7 +53,8 @@
 
 <form method="POST">
 	<input type="hidden" name="snapshot" value="{$snapshot}" />
-	<input type="submit" value="Save Snapshot" />
+	<input type="submit" value="Save Snapshot" /><br />
+	{if $last_snapshot}<p>Last saved {$last_snapshot}</p>{/if}
 </form>
 {if $multiple}
 	<hr />

@@ -4,6 +4,6 @@
     <path>civicrm/overrides</path>
     <page_callback>CRM_Overrides_Page_Overrides</page_callback>
     <title>Overrides</title>
-    <access_arguments>access CiviCRM</access_arguments>
+    <access_arguments>administer CiviCRM</access_arguments>
   </item>
 </menu>
