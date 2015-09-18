@@ -30,7 +30,7 @@
 			<p><strong>{$name}</strong></p>
 			<ul>
 				{foreach from=$files item=file}
-					<li{if $core[$file]['changed']} class="overridden"{elseif $core[$file]['is_new']} class="addition"{/if}>{$file}</li>
+					<li{if $core.$file.changed} class="overridden"{elseif $core.$file.is_new} class="addition"{/if}>{$file}</li>
 				{/foreach}
 			</ul>
 		</div>
@@ -61,7 +61,7 @@
 	<p class="warn">WARNING: The following files are overridden by more than one extension.</p>
 	<ul>
 		{foreach from=$core key=name item=info}
-			{if $info['multiple']}
+			{if $info.multiple}
 				<li>{$name}</li>
 			{/if}
 		{/foreach}
