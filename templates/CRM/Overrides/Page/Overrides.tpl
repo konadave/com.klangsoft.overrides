@@ -27,7 +27,8 @@
 <div id="extension-list">
 	{foreach from=$extensions key=name item=files}
 		<div class="extension-overrides">
-			<p><strong>{$name}</strong></p>
+			<h3>{$friendly[$name]}</h3>
+			<p><strong>{$name}</strong> ({$statuses[$name]})</p>
 			<ul>
 				{foreach from=$files item=file}
 					<li{if $core.$file.changed} class="overridden"{elseif $core.$file.is_new} class="addition"{/if}>{$file}</li>

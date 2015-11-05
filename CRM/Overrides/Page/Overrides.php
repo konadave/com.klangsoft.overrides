@@ -11,6 +11,7 @@ class CRM_Overrides_Page_Overrides extends CRM_Core_Page {
     CRM_Utils_System::setTitle(ts('Extension File Overrides'));
 
     $system = CRM_Extension_System::singleton();
+    $manager = $system->getManager();
     $container = $system->getDefaultContainer();
 
     $keys = $container->getKeys();
@@ -31,14 +32,20 @@ class CRM_Overrides_Page_Overrides extends CRM_Core_Page {
         $core['mulitple'] = $multiple = true;
     }
 
-    $extensions = array();
+    $extensions = $statuses = $friendly = array();
     foreach($this->extensions as $name => $files) {
-      if (count($files) > 0)
+      if (count($files) > 0) {
         $extensions[$name] = $files;
+        $statuses[$name] = $manager->getStatus($name);
+        $friendly[$name] = CRM_Core_DAO::singleValueQuery("SELECT name FROM civicrm_extension WHERE full_name=%1",
+          array(1 => array($name, 'String')));
+      }
     }
 
     $this->assign('multiple', $multiple);
     $this->assign('extensions', $extensions);
+    $this->assign('statuses', $statuses);
+    $this->assign('friendly', $friendly);
     $this->assign('core', $this->core);
     $this->assign('snapshot', $snapshot);
     $this->assign('last_snapshot', CRM_Core_BAO_Setting::getItem('com.klangsoft_overrides', 'last_snapshot'));
