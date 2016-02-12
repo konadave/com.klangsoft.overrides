@@ -29,7 +29,7 @@ class CRM_Overrides_Page_Overrides extends CRM_Core_Page {
     $multiple = false;
     foreach($this->core as &$core) {
       if (count($core['extensions']) > 1)
-        $core['mulitple'] = $multiple = true;
+        $core['multiple'] = $multiple = true;
     }
 
     $extensions = $statuses = $friendly = array();
@@ -38,7 +38,7 @@ class CRM_Overrides_Page_Overrides extends CRM_Core_Page {
         $extensions[$name] = $files;
         $statuses[$name] = $manager->getStatus($name);
         $friendly[$name] = CRM_Core_DAO::singleValueQuery("SELECT name FROM civicrm_extension WHERE full_name=%1",
-          array(1 => array($name, 'String')));
+          array(1 => array($name, 'String'))) ?: $name;
       }
     }
 
