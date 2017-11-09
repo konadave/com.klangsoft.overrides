@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <menu>
   <item>
-    <path>civicrm/overrides</path>
+    <path>civicrm/admin/overrides</path>
     <page_callback>CRM_Overrides_Page_Overrides</page_callback>
     <title>Overrides</title>
     <access_arguments>administer CiviCRM</access_arguments>
