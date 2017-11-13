@@ -8,7 +8,7 @@ So what happens when the core file that the extension has overridden gets modifi
 
 This extension makes it easier to keep track of which extensions override core files, and to detect when a core file that's been overriden gets updated.
 
-The first time you access the extension, at http://yourdomain/civicrm/overrides, it will create a snapshot of the core files that are being overridden in your installation. Any time in the future when you make a change to your site files, revist the extension page. Files that have been changed will be listed in red, those that have been added will be listed in blue.
+The first time you access the extension, at http://yourdomain/civicrm/admin/overrides, it will create a snapshot of the core files that are being overridden in your installation. Any time in the future when you make a change to your site files, revist the extension page. Files that have been changed will be listed in red, those that have been added will be listed in blue.
 
 If a file is shown as changed, you should first notify the maintainer of the extension to let them know that their extension may need to be updated to work with the latest core file(s). If you are unable to reach the maintainer, or they're not interested in doing anything about it, then you or someone in your IT department should look into what changed and merge them into the extension's overrides. The other option is to disable the extension.
 
