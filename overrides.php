@@ -1,6 +1,7 @@
 <?php
 
 require_once 'overrides.civix.php';
+use CRM_Overrides_ExtensionUtil as E;
 
 /**
  * Implements hook_civicrm_config().
@@ -133,6 +134,23 @@ _overrides_civix_civicrm_angularModules($angularModules);
  */
 function overrides_civicrm_alterSettingsFolders(&$metaDataFolders = NULL) {
   _overrides_civix_civicrm_alterSettingsFolders($metaDataFolders);
+}
+
+/**
+ * Implements hook_civicrm_navigationMenu().
+ *
+ * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_navigationMenu
+ */
+function overrides_civicrm_navigationMenu(&$menu) {
+  _overrides_civix_insert_navigation_menu($menu, 'Administer/Administration Console', array(
+    'label'      => E::ts('Extension File Overrides'),
+    'name'       => 'overrides_admin',
+    'url'        => 'civicrm/admin/overrides',
+    'permission' => 'administer CiviCRM',
+    'operator'   => 'OR',
+    'separator'  => 0,
+  ));
+  _overrides_civix_navigationMenu($menu);
 }
 
 /**
