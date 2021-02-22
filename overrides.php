@@ -37,7 +37,7 @@ function overrides_civicrm_install() {
 
   CRM_Core_DAO::executeQuery("INSERT INTO `klangsoft_overrides` VALUES ('a:0:{}');");
 
-  CRM_Core_BAO_Setting::setItem('', 'com.klangsoft_overrides', 'last_snapshot');
+  \Civi::settings()->set('com.klangsoft_overrides:last_snapshot', '');
 
   _overrides_civix_civicrm_install();
 }

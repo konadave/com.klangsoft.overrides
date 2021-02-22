@@ -48,7 +48,7 @@ class CRM_Overrides_Page_Overrides extends CRM_Core_Page {
     $this->assign('friendly', $friendly);
     $this->assign('core', $this->core);
     $this->assign('snapshot', $snapshot);
-    $this->assign('last_snapshot', CRM_Core_BAO_Setting::getItem('com.klangsoft_overrides', 'last_snapshot'));
+    $this->assign('last_snapshot', \Civi::settings()->get('com.klangsoft_overrides:last_snapshot'));
 
     parent::run();
   }
