@@ -1,5 +1,5 @@
 Package: com.klangsoft.overrides
-Copyright (C) 2015, David Reedy Jr <davidrjr.konadave@gmail.com>
+Copyright (C) 2023, David Reedy Jr <davidrjr.konadave@gmail.com>
 Licensed under the GNU Affero Public License 3.0 (below).
 
 -------------------------------------------------------------------------------

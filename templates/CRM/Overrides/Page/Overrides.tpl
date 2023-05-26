@@ -1,76 +1,85 @@
-{literal}
-	<style type="text/css">
-		#extension-list {
-			float: right;
-			margin-left: 50px;
-			border: 1px solid silver;
-			max-width: 50%;
-		}
-		#extension-list p {
-			padding: 0px 10px;
-		}
-		.extension-overrides {
-			margin: 20px 5px;
-		}
-		.warn,
-		.overridden {
-			font-weight: bold;
-			color: red;
-		}
-		.addition {
-			font-weight: bold;
-			color: blue;
-		}
-	</style>
-{/literal}
-<hr />
-<div id="extension-list">
-	{foreach from=$extensions key=name item=files}
-		<div class="extension-overrides">
-			<h3>{$friendly[$name]}</h3>
-			<p><strong>{$name}</strong> ({$statuses[$name]})</p>
-			<ul>
-				{foreach from=$files item=file}
-					<li{if $core.$file.changed} class="overridden"{elseif $core.$file.is_new} class="addition"{/if}>{$file}</li>
-				{/foreach}
-			</ul>
-		</div>
-	{foreachelse}
-		<p><strong>None of your extensions are overriding any core files</strong>.</p>
-	{/foreach}
+<div id="extension-file-overrides">
+  
+  <div id="overriders">
+    {foreach from=$extensions item=ext key=key}
+      <div class="extension{if $ext.status != 'installed'} disabled{/if}">
+        <div class="title">{$ext.label}{if $ext.status != 'installed'} - Disabled{/if}</div>
+        <div class="release">v{$ext.version}, {$ext.releaseDate} (CiviCRM {$ext.civiVersion})</div>
+        <div class="description">{$ext.description}</div>
+        <hr />
+        <ul>
+          {foreach from=$ext.overrides item=flags key=fn}
+            <li class="override" data-extension-key="{$key}" data-override="{$fn}">
+              <span class="fn{if $flags.conflict} conflict{/if}{if $flags.changed} changed{/if}">{$fn}</span>
+              {if $flags.conflict}<i class="crm-i fa-bolt"></i>{/if}
+              {if $flags.changed}<i class="crm-i fa-exclamation-triangle"></i>{/if}
+              {if $flags.local}<i class="crm-i fa-server"></i>{/if}
+              {if $flags.future}<i class="crm-i fa-clock-o"></i>{/if}
+            </li>
+          {/foreach}
+        </ul>
+      </div>
+    {foreachelse}
+      <p>Congratulations, no enabled extension is currently overriding a core file.</p>
+    {/foreach}
+  </div>
+
+  <div id="diff-close" class="hidden"><i class="crm-i fa-times"></i></div>
+
+  <div id="differator" class="hidden">
+    <div id="diff-header">
+      <h3 class="title ext-name"></h3>
+      <div class="ext-override"></div>
+    </div>
+    <div id="diff-choices">
+      <div class="choice">
+        <input type="radio" name="choice" id="what-ext-changed" value="1" />
+        <label for="what-ext-changed">#1 - Changes made by the extension</label>
+        <div class="description">Comparing against CiviCRM <span class="ext-ver"></span></div>
+      </div>
+
+      <div class="choice">
+        <input type="radio" name="choice" id="what-civi-changed" value="2" />
+        <label for="what-civi-changed">#2 - Changes since made by CiviCRM</label>
+        <div class="description">Comparing CiviCRM <span class="ext-ver"></span> against CiviCRM {$coreVer}</div>
+      </div>
+
+      <div class="choice">
+        <input type="radio" name="choice" id="what-local-changed" value="3" />
+        <label for="what-local-changed">#3 - Changes made on server filesystem</label>
+        <div class="description">Comparing server file to CiviCRM {$coreVer}</div>
+      </div>
+
+      <div class="choice">
+        <input type="radio" name="choice" id="what-ext-latest" value="4" />
+        <label for="what-ext-latest" class="diff-cleaner">#4 - Merge override into latest</label>
+        <div class="description">An automated attempt at merging #1 and #3 into #2</div>
+      </div>
+
+      <div class="choice">
+        <input type="radio" name="choice" id="what-latest-ext" value="5" />
+        <label for="what-latest-ext" class="diff-cleaner">#5 - Merge latest into override</label>
+        <div class="description">An automated attempt at merging #2 and #3 into #1</div>
+      </div>
+    </div>
+
+    <div id="diff-nav" class="not-visible">
+      <div style="float:right">
+        {if $canDownload}
+          <a id="diff-download" class="button" href="#" target="_blank"><i class="crm-i fa-download"></i>&nbsp;Download</a>
+        {/if}
+        <a id="diff-count" class="button highlight">
+          <i class="crm-i fa-chevron-up"></i>&nbsp;<span class="of"></span>&nbsp;<i class="crm-i fa-chevron-down"></i>
+        </a>
+      </div>
+      <span class="diff-count removed"></span>
+      <span class="diff-count added"></span>
+    </div>
+
+    <div id="the-diff">Loading...</div>
+  </div>
+
+  <div id="diff-help" class="markdown-body">{$instructions}</div>
+
+  <div class="clear"></div>
 </div>
-<p>An extension may supply modified copies of core PHP and template files, and by doing so causes CiviCRM to use those files in place of the original so long as the extension is enabled. There's nothing wrong with doing this; some functionality would be very difficult, if not impossible, to implement otherwise. The major downside is that they can be hard to maintain.</p>
-
-<p>So what happens when the core file that the extension has overridden gets modified? CiviCRM will continue to use the overriden file provided by the extension. This means a security patch may not get applied, or you might miss out on some new feature that was added, etc.</p>
-
-<p><strong>The list to the right shows which extensions are overridding core files, and
-	which files they override. Any file listed in <span class="overridden">red</span> has been changed in core since the
-	last snapshot was saved. Any file listed in <span class="addition">blue</span> has been added since the last snapshot was
-	saved, so you should save a new snapshot now.</strong></p>
-
-<p>If a file is shown as changed, you should first notify the maintainer of the extension to let them know that their extension may need to be updated to work with the latest core file(s). If you are unable to reach the maintainer, or they're not interested in doing anything about it, then you or someone in your IT department should look into what changed and merge them into the extension's overrides. The other option is to disable the extension.</p>
-
-<p>After all changes have been resolved, save the current snapshot.</p>
-
-<form method="POST">
-	<input type="hidden" name="snapshot" value="{$snapshot}" />
-	<input type="submit" value="Save Snapshot" /><br />
-	{if $last_snapshot}<p>Last saved {$last_snapshot}</p>{/if}
-</form>
-{if $multiple}
-	<hr />
-	<p class="warn">WARNING: The following files are overridden by more than one extension.</p>
-	<ul>
-		{foreach from=$core key=name item=info}
-			{if $info.multiple}
-				<li>{$name}</li>
-				<ul>
-					{foreach from=$info.extensions item=ext}
-						<li>{$friendly.$ext}</li>
-					{/foreach}
-				</ul>
-			{/if}
-		{/foreach}
-	</ul>
-{/if}
-<div class="clear"></div>

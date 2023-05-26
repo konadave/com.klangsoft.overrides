@@ -3,7 +3,7 @@
   <item>
     <path>civicrm/admin/overrides</path>
     <page_callback>CRM_Overrides_Page_Overrides</page_callback>
-    <title>Overrides</title>
+    <title>Extension File Overrides</title>
     <access_arguments>administer CiviCRM</access_arguments>
   </item>
 </menu>

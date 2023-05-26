@@ -1,17 +1,40 @@
 # com.klangsoft.overrides
 
-## Extension File Overrides
+An extension may supply modified copies of core PHP and template files (aka an override), and by doing so causes CiviCRM to use those files in place of the original so long as the extension is enabled. There's nothing wrong with doing this; some functionality would be very difficult, if not impossible, to implement otherwise. The major downside is that they can be hard to maintain.
 
-An extension may supply modified copies of core PHP and template files, and by doing so causes CiviCRM to use those files in place of the original so long as the extension is enabled. There's nothing wrong with doing this; some functionality would be very difficult, if not impossible, to implement otherwise. The major downside is that they can be hard to maintain.
+So what happens when the core file that the extension has overridden gets modified? CiviCRM will continue to use the overridden file provided by the extension. This means a security patch may not get applied, or you might miss out on some new feature that was added, etc.
 
-So what happens when the core file that the extension has overridden gets modified? CiviCRM will continue to use the overriden file provided by the extension. This means a security patch may not get applied, or you might miss out on some new feature that was added, etc.
+This extension keeps tabs on which core files are overridden by an extension and will set system status to critical whenever it sees the core file has been modified. From the extension user interface, you will be able to see which files are overridden, which have been updated, see what changes the extension originally made, what has changed in CiviCRM since, potential merges, and download a `.zip` with some files to help you get the changes incorporated into the override.
 
-This extension makes it easier to keep track of which extensions override core files, and to detect when a core file that's been overriden gets updated.
+---
 
-The first time you access the extension, at http://yourdomain/civicrm/admin/overrides, it will create a snapshot of the core files that are being overridden in your installation. Any time in the future when you make a change to your site files, revist the extension page. Files that have been changed will be listed in red, those that have been added will be listed in blue.
+The extension is licensed under [AGPL-3.0](LICENSE.txt).
 
-If a file is shown as changed, you should first notify the maintainer of the extension to let them know that their extension may need to be updated to work with the latest core file(s). If you are unable to reach the maintainer, or they're not interested in doing anything about it, then you or someone in your IT department should look into what changed and merge them into the extension's overrides. The other option is to disable the extension.
+## Requirements
 
-If it shows that files have been added, you should save a new snapshot as soon as possible.
+* PHP v7.4+
+* CiviCRM (*FIXME: Version number*)
 
-After all changes have been resolved, have the extension save an updated snapshot.
+## Installation (Web UI)
+
+Learn more about installing CiviCRM extensions in the [CiviCRM Sysadmin Guide](https://docs.civicrm.org/sysadmin/en/latest/customize/extensions/).
+
+## Installation (CLI, Zip)
+
+Sysadmins and developers may download the `.zip` file for this extension and
+install it with the command-line tool [cv](https://github.com/civicrm/cv).
+
+```bash
+cd <extension-dir>
+cv dl com.klangsoft.overrides@https://github.com/FIXME/com.klangsoft.overrides/archive/master.zip
+```
+
+## Installation (CLI, Git)
+
+Sysadmins and developers may clone the [Git](https://en.wikipedia.org/wiki/Git) repo for this extension and
+install it with the command-line tool [cv](https://github.com/civicrm/cv).
+
+```bash
+git clone https://github.com/FIXME/com.klangsoft.overrides.git
+cv en overrides
+```

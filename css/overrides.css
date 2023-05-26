@@ -1,0 +1,138 @@
+#overriders {
+  width: 33%;
+  float: left;
+}
+#differator, #diff-help {
+  width: 65%;
+  margin-left: 35%;
+}
+
+.extension {
+  margin-bottom: 16px;
+  padding: 8px;
+  border: 1px solid silver;
+}
+
+.extension .title,
+#diff-header .title {
+  font-size: larger;
+  font-weight: bold;
+}
+
+.extension .release {
+  font-size: inherit;
+}
+
+.extension .description {
+  font-size: smaller;
+}
+
+.extension ul {
+  padding: 8px;
+  margin: auto;
+  list-style-type: none;
+}
+
+#legend li .crm-i {
+  width: 1rem;
+  text-align: center;
+}
+
+.override {
+  padding: 2px;
+}
+.override:hover {
+  cursor: pointer;
+  background-color: aliceblue;
+}
+
+.extension .fn.conflict {
+  color: maroon;
+}
+
+.extension .fn.changed {
+  font-weight: bold;
+}
+
+.extension .crm-i {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#diff-header {
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid silver;
+}
+
+#diff-choices .description {
+  margin-left: 2rem;
+}
+
+.choice {
+  margin-bottom: 8px;
+}
+
+#the-diff {
+  width: calc(100% - 12px);
+  height: 50vh;
+  margin-top: 10px;
+  border: 1px solid silver;
+  background-color: white;
+  color: black;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  overflow: clip scroll;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  padding: 5px;
+  line-height: normal;
+}
+
+#the-diff .removed, #the-diff .added {
+  cursor: pointer;
+  display: block;
+}
+
+#diff-close {
+  float: right;
+  padding-top: 4px;
+  padding-right: 8px;
+  cursor: pointer;
+}
+
+.diff-clean {
+  font-weight: bold !important;
+  color: forestgreen;
+}
+
+.diff-clean::after {
+  font-family: 'FontAwesome';
+  content: '\f126';
+  padding-left: 8px;
+}
+
+.diff-count {
+  padding: 4px;
+  border: 1px solid black;
+  text-shadow: none !important;
+  color: inherit !important;
+}
+
+.removed {
+  background-color: pink !important;
+}
+.removed.active {
+  border: 2px solid black !important;
+}
+
+.added {
+  background-color: lightgreen !important;
+}
+.added.active {
+  border: 2px solid black !important;
+}
+
+.not-visible {
+  visibility: hidden;
+}
