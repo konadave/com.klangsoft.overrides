@@ -1,4 +1,4 @@
-# com.klangsoft.overrides
+# Extension File Overrides
 
 An extension may supply modified copies of core PHP and template files (aka an override), and by doing so causes CiviCRM to use those files in place of the original so long as the extension is enabled. There's nothing wrong with doing this; some functionality would be very difficult, if not impossible, to implement otherwise. The major downside is that they can be hard to maintain.
 
