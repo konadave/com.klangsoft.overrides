@@ -26,7 +26,7 @@ install it with the command-line tool [cv](https://github.com/civicrm/cv).
 
 ```bash
 cd <extension-dir>
-cv dl com.klangsoft.overrides@https://github.com/FIXME/com.klangsoft.overrides/archive/master.zip
+cv dl com.klangsoft.overrides@https://github.com/konadave/com.klangsoft.overrides/archive/master.zip
 ```
 
 ## Installation (CLI, Git)
@@ -35,6 +35,16 @@ Sysadmins and developers may clone the [Git](https://en.wikipedia.org/wiki/Git) 
 install it with the command-line tool [cv](https://github.com/civicrm/cv).
 
 ```bash
-git clone https://github.com/FIXME/com.klangsoft.overrides.git
+git clone https://github.com/konadave/com.klangsoft.overrides.git
 cv en overrides
 ```
+
+## Support
+
+Want to provide some feedback? Did you find an issue that needs addressed? Do you have a feature request or suggestion for the documentation? Please check out the <a href="https://github.com/konadave/com.klangsoft.overrides/issues" target="_blank">issue queue</a> to create a new issue or chime in on an existing one.
+
+Are you a developer looking to help out with some solid code? Please check out the <a href="https://github.com/konadave/com.klangsoft.overrides/issues" target="_blank">issue queue</a>, work up a merge request, and submit for consideration. All help is appreciated.
+
+Are you an organization with some funds to spare and would like to aid the continued development of this and other quality CiviCRM extensions? Consider contributing to the "tip jar" by scanning the following PayPal QR code. Please don't feel obligated to contribute one of the suggested amounts; give what you can, any amount is both helpful and appreciated. Thanks!
+
+![Tips are appeciated!](images/qrcode.png)
