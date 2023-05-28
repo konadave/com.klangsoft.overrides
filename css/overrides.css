@@ -136,3 +136,7 @@
 .not-visible {
   visibility: hidden;
 }
+
+.hidden {
+  display: none;
+}
