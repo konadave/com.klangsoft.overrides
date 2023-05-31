@@ -14,8 +14,8 @@
     <url desc="Support">https://github.com/konadave/com.klangsoft.overrides/issues</url>
     <url desc="Licensing">http://www.gnu.org/licenses/agpl-3.0.html</url>
   </urls>
-  <releaseDate>2023-05-25</releaseDate>
-  <version>2.0-beta1</version>
+  <releaseDate>2023-05-31</releaseDate>
+  <version>2.0-beta.2</version>
   <develStage>beta</develStage>
   <compatibility>
     <ver>5.0</ver>

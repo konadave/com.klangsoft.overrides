@@ -8,7 +8,7 @@ The newest version of this extension works quite a bit differently. It looks up 
 
 This works very well for general purpose, generally distributed extensions meant for public consumption. But for your in-house/client specific extensions, it depends on your vigilance. An example; looking at a client site that has a lot of customizations, we have a handful of custom extensions with several overrides each, all dating back to the late 2010s. The overrides in these extensions have been kept up to date, but nobody ever bothered to change the release date for them. Looking at *Extension File Overrides* for this client will produce "incorrect" results because of it.
 
-Since I know the overrides are up to date, I could just go through and change the release date of each extension to that of the currently installed version of CiviCRM. What I should do, however, is check `git` history and set the release date of the extension based on latest update to an override.
+Since I know the overrides are up to date, I could just go through and change the release date of each extension to that of the currently installed version of CiviCRM. What I should do, however, is check `git` history and set the release date of the extension based on latest update to an override, i.e. the release date of CiviCRM that was current at that time.
 
 You can check the [CiviCRM Release Notes](https://github.com/civicrm/civicrm-core/blob/master/release-notes.md) to find the release date for a specific version of CiviCRM.
 
